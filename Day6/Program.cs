@@ -1,47 +1,23 @@
 ﻿var input = File.ReadAllLines("input.txt")[0];
 
-var markerIndex = 0;
-var marker = "";
-var markerFound = false;
-
-var messageIndex = 0;
-var message = "";
-var messageFound = false;
-
-foreach (var c in input)
+for (var i = 0; i < input.Length - 4; i++)
 {
-    if (!markerFound) {
-        markerIndex++;
-        marker += c;
-        if (marker.Length == 4)
-        {
-            if (marker.Distinct().Count() == 4)
-            {
-                markerFound = true;
-                Console.WriteLine(markerIndex);
-            }
-            else
-            {
-                marker = marker[1..];
-            }
-        }
-    }
+    var candidateMarker = input.Substring(i, 4);
 
-    if (!messageFound)
+    if (candidateMarker.Distinct().Count() == 4)
     {
-        messageIndex++;
-        message += c;
-        if (message.Length == 14)
-        {
-            if (message.Distinct().Count() == 14)
-            {
-                messageFound = true;
-                Console.WriteLine(messageIndex);
-            }
-            else
-            {
-                message = message[1..];
-            }
-        }
+        Console.WriteLine(i + 4);
+        break;
+    }
+}
+
+for (var i = 0; i < input.Length - 14; i++)
+{
+    var candidateMessage = input.Substring(i, 14);
+
+    if (candidateMessage.Distinct().Count() == 14)
+    {
+        Console.WriteLine(i + 14);
+        break;
     }
 }
